@@ -202,7 +202,7 @@ body {
     @apply flex flex-wrap gap-4 w-full max-md:justify-center;
   }
   .companion-card {
-    @apply flex flex-col rounded-4xl border border-black px-4 py-4 gap-5 w-full min-lg:max-w-[410px] justify-between;
+    @apply flex flex-col rounded-4xl border border-black px-4 py-4 gap-5 w-full lg:max-w-[410px] justify-between;
   }
   .subject-badge {
     @apply bg-black text-white rounded-4xl text-sm px-2 py-1 capitalize;
@@ -211,8 +211,12 @@ body {
     @apply px-2 bg-black rounded-4xl flex items-center h-full aspect-square cursor-pointer;
   }
   .input {
-    @apply !border-black !bg-white focus-visible:!ring-0 focus-visible:!border-black !w-full;
+    @apply= "border-black bg-white focus-visible:ring-0 focus-visible:border-black w-full";
   }
+
+  /* .input {
+    @apply !border-black !bg-white focus-visible:!ring-0 focus-visible:!border-black !w-full;
+  } */
   .rounded-border {
     @apply rounded-4xl border border-black;
   }
@@ -223,7 +227,7 @@ body {
     @apply bg-cta-gold rounded-4xl px-3 py-1.5 text-black;
   }
   .btn-primary {
-    @apply bg-primary text-white rounded-xl cursor-pointer px-4 py-2 flex items-center gap-2;
+    @apply bg-[#Fe5933] border border-black text-white rounded-xl cursor-pointer px-4 py-2 flex items-center gap-2;
   }
   .navbar {
     @apply flex items-center justify-between mx-auto w-full px-14 py-4 bg-white max-sm:px-4;
@@ -272,6 +276,13 @@ body {
 }
 
 @layer utilities {
+  .bg-cta {
+    background-color: #2c2c2c;
+  }
+
+  .bg-cta-gold {
+    background-color: #ffd700;
+  }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }

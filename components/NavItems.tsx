@@ -18,14 +18,14 @@ const navItems = [
     label: "My Journey",
     href: "/my-journey",
   },
-  {
-    label: "Subscription",
-    href: "/subscription",
-  },
-  {
-    label: "Sign In",
-    href: "/sign-in",
-  },
+  // {
+  //   label: "Subscription",
+  //   href: "/subscription",
+  // },
+  // {
+  //   label: "Sign In",
+  //   href: "/sign-in",
+  // },
 ];
 const NavItems = () => {
   const pathName = usePathname();
