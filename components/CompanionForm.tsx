@@ -1,16 +1,8 @@
 "use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -22,22 +14,28 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { subjects } from "@/constants";
-import { Textarea } from "./ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
 import { createCompanion } from "@/lib/actions/companions.actions";
 import { redirect } from "next/navigation";
 
 const formSchema = z.object({
-  name: z.string().min(1, { message: "companion is Required" }),
-  subject: z.string().min(1, { message: "Subject is Required" }),
-  topic: z.string().min(1, { message: "Topic is Required" }),
-  voice: z.string().min(1, { message: "Voice is Required" }),
-  style: z.string().min(1, { message: "Style is Required" }),
-  duration: z.coerce.number().min(1, { message: "Duration  is Required" }),
+  name: z.string().min(1, { message: "Companion is required." }),
+  subject: z.string().min(1, { message: "Subject is required." }),
+  topic: z.string().min(1, { message: "Topic is required." }),
+  voice: z.string().min(1, { message: "Voice is required." }),
+  style: z.string().min(1, { message: "Style is required." }),
+  duration: z.coerce.number().min(1, { message: "Duration is required." }),
 });
 
 const CompanionForm = () => {
-  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,18 +48,17 @@ const CompanionForm = () => {
     },
   });
 
-  // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const companion = await createCompanion(values);
+
     if (companion) {
-      // Redirect to the newly created companion's page
       redirect(`/Companions/${companion.id}`);
     } else {
-      // Handle error case, e.g., show a notification or alert
-      console.error("Failed to create companion");
+      console.log("Failed to create a companion");
       redirect("/");
     }
   };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -201,9 +198,12 @@ const CompanionForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full cursor-pointer bg-[#Fe5933]">
+        <button
+          type="submit"
+          className="w-full btn-primary cursor-pointer mb-10"
+        >
           Build Your Companion
-        </Button>
+        </button>
       </form>
     </Form>
   );
