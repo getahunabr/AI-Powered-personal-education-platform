@@ -8,6 +8,7 @@ import {
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import {
+  getBookmarkedCompanions,
   getUserCompanion,
   getUserSession,
 } from "@/lib/actions/companions.actions";
@@ -21,6 +22,7 @@ const ProfilePage = async () => {
 
   const companions = await getUserCompanion(user.id);
   const sessionHistory = await getUserSession(user.id);
+  const bookmarkedCompanions = await getBookmarkedCompanions(user.id);
   return (
     <main className="min-lg:w-3/4">
       <section className="flex justify-between gap-4 max-sm:flex-col items-center">
@@ -68,6 +70,17 @@ const ProfilePage = async () => {
         </div>
       </section>
       <Accordion type="multiple">
+        <AccordionItem value="bookmarks">
+          <AccordionTrigger className="text-2xl font-bold">
+            Bookmarked Companions {`(${bookmarkedCompanions.length})`}
+          </AccordionTrigger>
+          <AccordionContent>
+            <CompanionList
+              companions={bookmarkedCompanions}
+              title="Bookmarked Companions"
+            />
+          </AccordionContent>
+        </AccordionItem>
         <AccordionItem value="recent">
           <AccordionTrigger className="text-2xl font-bold">
             Recent Sessions
